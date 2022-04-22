@@ -1,6 +1,6 @@
 
 
-export default function getAppointmentsForDay(state, day) {
+export function getAppointmentsForDay(state, day) {
 
   let appointmentArr = [];
 
@@ -15,5 +15,20 @@ export default function getAppointmentsForDay(state, day) {
   });
 
   return result;
+
+}
+
+export function getInterview(state, interview) {
+
+  if (!interview) {
+    return null;
+  }
+
+  const interviewInfo = state.interviewers[interview.interviewer]
+
+  return {
+    student: interview.student,
+    interviewer: interviewInfo
+  }
 
 }
