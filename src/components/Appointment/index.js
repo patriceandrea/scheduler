@@ -17,25 +17,11 @@ function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  const formatTime = (time) => {
-    if (!time) {
-      return 'No Appointments'
-    }
-    return `Appointment at ${time}`
-
-  };
-
-  const availabilityAppointment = formatTime(props.time);
 
   return (
     <Fragment>
       <Header time={props.time} />
       <article className="appointment">
-        {/* {availabilityAppointment}
-
-        {props.interview ? <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer} /> : <Empty />} */}
 
         {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
         {mode === SHOW && (
