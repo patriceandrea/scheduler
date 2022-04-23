@@ -1,5 +1,6 @@
+//Helper Functions 
 
-
+// Select Appointments for that Day 
 export function getAppointmentsForDay(state, day) {
 
   let appointmentArr = [];
@@ -18,6 +19,7 @@ export function getAppointmentsForDay(state, day) {
 
 }
 
+// Select the Interview 
 export function getInterview(state, interview) {
 
   if (!interview) {
@@ -33,6 +35,7 @@ export function getInterview(state, interview) {
 
 }
 
+//Select the interviewers for that day 
 export function getInterviewersForDay(state, day) {
   let InterviewersArr = [];
 
