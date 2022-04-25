@@ -48,7 +48,10 @@ export default function Application(props) {
     const interview = getInterview(state, appointment.interview);
     const interviewers = getInterviewersForDay(state, state.day);
 
-
+    function cancelInterview(id) {
+      return axios.delete(`/api/appointments/${id}`).then(res => {
+      });
+    };
 
 
     function bookInterview(id, interview) {
@@ -81,7 +84,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
-
+        cancelInterview={cancelInterview}
       />
 
     )
