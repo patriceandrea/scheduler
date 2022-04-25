@@ -45,6 +45,17 @@ export default function Application(props) {
     const interview = getInterview(state, appointment.interview);
     const interviewers = getInterviewersForDay(state, state.day);
 
+    function bookInterview(id, interview) {
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+      console.log(id, appointment);
+    }
+
+    // bookInterview(3);
+
+
     return (
       <Appointment
         key={appointment.id}
@@ -52,6 +63,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
+
       />
 
     )
@@ -76,6 +89,7 @@ export default function Application(props) {
             days={state.days}
             value={state.day}
             onChange={setDay}
+
           />
         </nav>
         <img

@@ -17,6 +17,16 @@ function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    props.bookInterview(props.id, interview);
+  }
+
+
+
 
   return (
     <Fragment>
@@ -33,6 +43,7 @@ function Appointment(props) {
         {mode === CREATE && <Form
           interviewers={props.interviewers}
           onCancel={() => back(EMPTY)}
+          onSave={save}
         />}
       </article >
 
