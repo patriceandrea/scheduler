@@ -4,7 +4,7 @@ import InterviewerList from 'components/InterviewerList';
 import { useState } from "react";
 
 function Form(props) {
-  const [student, setStudent] = useState(props.student || "");
+  const [student, setStudent] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
 
