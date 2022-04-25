@@ -10,6 +10,9 @@ import axios from 'axios';
 import { useEffect } from "react";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors"
 import useVisualMode from "hooks /useVisualMode";
+import Show from "./Appointment/Show";
+
+
 
 
 export default function Application(props) {
@@ -45,15 +48,42 @@ export default function Application(props) {
     const interview = getInterview(state, appointment.interview);
     const interviewers = getInterviewersForDay(state, state.day);
 
+
+
+    // function bookInterview(id, interview) {
+    //   // console.log(id, appointment);
+
+    //   const appointment = {
+    //     ...state.appointments[id],
+    //     interview: { ...interview }
+    //   };
+    //   const appointments = {
+    //     ...state.appointments,
+    //     [id]: appointment
+    //   };
+    //   setState({
+    //     ...state,
+    //     appointments
+    //   });
+    // }
+
+    // bookInterview(3);
+
     function bookInterview(id, interview) {
+      console.log(id, interview);
       const appointment = {
         ...state.appointments[id],
         interview: { ...interview }
       };
-      console.log(id, appointment);
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+      setState({
+        ...state,
+        appointments
+      });
     }
-
-    // bookInterview(3);
 
 
     return (
