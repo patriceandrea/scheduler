@@ -1,6 +1,6 @@
-
 import axios from "axios";
 import { useState, useEffect } from "react";
+
 
 export default function useApplicationData() {
 
@@ -11,7 +11,7 @@ export default function useApplicationData() {
   });
 
   const setDay = day => setState({ ...state, day });
-  // const setDays = days => setState(prev => ({ ...prev, days }));
+
 
   useEffect(() => {
     Promise.all([
@@ -24,17 +24,26 @@ export default function useApplicationData() {
     });
   }, []);
 
+  function updateSpots(state, appointments, id) {
+    //find the day 
+    const dayObj = state.days.find(d => d.name === state.day);
 
-  function findDay(day) {
-    const daysOfWeek = {
-      Monday: 0,
-      Tuesday: 1,
-      Wednesday: 2,
-      Thursday: 3,
-      Friday: 4
+    //look at the appointment id 
+    let spots = 0;
+    for (const id of dayObj.appointments) {
+      const appointment = appointments[id];
+      if (!appointment.interview) {
+        spots++
+      }
     }
-    return daysOfWeek[day]
-  }
+    const day = { ...dayObj, spots };
+    const days = state.days.map(d => d.name === state.day ? day : d);
+
+    //return updated days arrays
+    return days;
+
+  };
+
 
 
   function bookInterview(id, interview) {
@@ -48,29 +57,10 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    const dayOfWeek = findDay(state.day)
-    let day = {
-      ...state.days[dayOfWeek],
-      spots: state.days[dayOfWeek]
-    }
 
-
-    if (!state.appointments[id].interview) {
-      day = {
-        ...state.days[dayOfWeek],
-        spots: state.days[dayOfWeek].spots - 1
-      }
-    } else {
-      day = {
-        ...state.days[dayOfWeek],
-        spots: state.days[dayOfWeek].spots
-      }
-    }
-
-    let days = state.days
-    days[dayOfWeek] = day;
 
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
+      const days = updateSpots(state, appointments);
       setState({
         ...state,
         appointments,
@@ -92,19 +82,15 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    const dayOfWeek = findDay(state.day)
-
-    const day = {
-      ...state.days[dayOfWeek],
-      spots: state.days[dayOfWeek].spots + 1
-    }
-
-    let days = state.days
-    days[dayOfWeek] = day;
 
 
-    return axios.delete(`/api/appointments/${id}`, appointment).then(() => {
-      setState({ ...state, appointments, days });
+    return axios.delete(`/api/appointments/${id}`).then(() => {
+      const days = updateSpots(state, appointments);
+      setState({
+        ...state,
+        appointments,
+        days
+      });
     });
   }
 
@@ -115,7 +101,5 @@ export default function useApplicationData() {
     cancelInterview
   };
 }
-
-
 
 
