@@ -7,24 +7,19 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../h
 import useApplicationData from "hooks /useApplicationData";
 
 
+// Main App - Main Parent Component 
 
 export default function Application(props) {
 
   const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
-
-
-
-
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
 
+  //Appointment component and defined as a variable appointmentList
   const appointmentList = dailyAppointments.map((appointment) => {
 
     const interview = getInterview(state, appointment.interview);
     const interviewers = getInterviewersForDay(state, state.day);
-
-
-
 
     return (
       <Appointment
@@ -55,12 +50,13 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
+
           <DayList
             days={state.days}
             value={state.day}
             onChange={setDay}
-
           />
+
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -69,7 +65,9 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
+
         {appointmentList}
+
       </section>
     </main>
   );
