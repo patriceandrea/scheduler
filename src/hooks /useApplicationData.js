@@ -24,6 +24,7 @@ export default function useApplicationData() {
     });
   }, []);
 
+  //allows to update spots if state.days has been changed 
   function updateSpots(state, appointments, id) {
     //find the day 
     const dayObj = state.days.find(d => d.name === state.day);
@@ -45,7 +46,7 @@ export default function useApplicationData() {
   };
 
 
-
+  //Book an Interview 
   function bookInterview(id, interview) {
     console.log(id, interview);
     const appointment = {
@@ -58,7 +59,7 @@ export default function useApplicationData() {
     };
 
 
-
+    //PUT request: allows to update interview  in the appointments api data
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
       const days = updateSpots(state, appointments);
       setState({
@@ -70,7 +71,7 @@ export default function useApplicationData() {
     });
   }
 
-  //Cancel Interview  
+  //Cancel an Interview  
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -83,7 +84,7 @@ export default function useApplicationData() {
     };
 
 
-
+    // PUT request: allows to update interview  in the appointments api data
     return axios.delete(`/api/appointments/${id}`).then(() => {
       const days = updateSpots(state, appointments);
       setState({
