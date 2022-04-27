@@ -3,7 +3,9 @@ import Button from 'components/Button';
 import InterviewerList from 'components/InterviewerList';
 import { useState } from "react";
 
+//Form Component
 function Form(props) {
+
   const [student, setStudent] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
@@ -22,6 +24,7 @@ function Form(props) {
     props.onSave(student, interviewer);
   };
 
+  //validate function used when there's an error
   function validate() {
     if (student === "") {
       setError("Student name cannot be blank");

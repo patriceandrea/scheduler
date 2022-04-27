@@ -10,7 +10,9 @@ import Form from './Form';
 import Confirm from './Confirm';
 import Error from './Error';
 
+//Appointment Component 
 function Appointment(props) {
+
   // Modes
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
@@ -22,11 +24,12 @@ function Appointment(props) {
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DESTROY = "ERROR_DESTROY";
 
+
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
-
+  //Function to save the appointment
   function save(name, interviewer) {
     if (name && interviewer) {
       transition(SAVING);
@@ -41,7 +44,7 @@ function Appointment(props) {
     }
   }
 
-  //original remove 
+  //Function to remove the appointment
   const remove = () => {
     if (mode === SHOW) {
       transition(CONFIRM);
@@ -53,9 +56,7 @@ function Appointment(props) {
     }
   }
 
-
-
-
+  //Function to edit the appointment
   const edit = () => {
     transition(EDIT);
   }
@@ -64,14 +65,17 @@ function Appointment(props) {
     <Fragment>
       <Header time={props.time} />
       <article className="appointment">
+
         {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
         {mode === SAVING && <Status message="Saving" />}
         {mode === DELETING && <Status message="Deleting" />}
+
         {mode === CONFIRM &&
           (<Confirm
             message="Are you sure you want to cancel this appointment"
             onCancel={back}
             onConfirm={remove} />)}
+
         {mode === SHOW && (
           <Show
             student={props.interview.student}
@@ -80,11 +84,13 @@ function Appointment(props) {
             onEdit={edit}
           />
         )}
+
         {mode === CREATE && <Form
           interviewers={props.interviewers}
           onCancel={() => back(EMPTY)}
           onSave={save}
         />}
+
         {mode === EDIT && (
           <Form
             name={props.interview.student}
@@ -93,21 +99,22 @@ function Appointment(props) {
             onCancel={back}
             interviewers={props.interviewers}
           />
-
-
         )}
+
         {mode === ERROR_SAVE && (
           <Error
             message="Could not save appointment"
             onClose={back}
           />
         )}
+
         {mode === ERROR_DESTROY && (
           <Error
             message="Could not delete appointment"
             onClose={back}
           />
         )}
+
       </article >
     </Fragment>
   );
