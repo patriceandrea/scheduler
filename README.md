@@ -1,4 +1,13 @@
 # Interview Scheduler
+Scheduler is a single-page **React** application allowing the user to book, edit, and cancel interviews. 
+
+* Database: Api Server using **PostgreSQL** Database
+* Testing: **Jest**, **StoryBook**, **Cypress** 
+
+
+## How to 📖 an appoinment 
+
+![](docs/scheduler_recording.gif)
 
 ## Setup
 
@@ -21,3 +30,12 @@ npm test
 ```sh
 npm run storybook
 ```
+## Dependencies
+
+  * axios 0.26.1 
+  * classnames 2.2.6
+  * normalize.css 8.0.1
+  * react 16.9.0
+  * react-dom 16.9.0
+  * react-scripts 3.0.0
+  
