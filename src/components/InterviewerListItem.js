@@ -3,7 +3,7 @@ import "./InterviewerListItem.scss"
 import classNames from "classnames";
 
 
-
+//InterviewListItem Component
 function InterviewerListItem(props) {
 
   const listClass = classNames("interviewers__item", {
