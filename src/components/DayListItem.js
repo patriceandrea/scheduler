@@ -10,6 +10,7 @@ export default function DayListItem(props) {
     "day-list__item--full": props.spots === 0,
   })
 
+  //Function that returns the remaining spots in the Front-End
   const formatSpots = (spots) => {
     if (spots === 0) {
       return 'no spots remaining'
@@ -20,6 +21,7 @@ export default function DayListItem(props) {
 
   };
 
+  //This variable returns the remaining spots in the Front-End
   const availabilityMessage = formatSpots(props.spots);
 
   return (
