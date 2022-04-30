@@ -13,7 +13,6 @@ import Error from './Error';
 //Appointment Component 
 function Appointment(props) {
 
-  // Modes
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -29,7 +28,7 @@ function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  //Function to save the appointment
+
   function save(name, interviewer) {
     if (name && interviewer) {
       transition(SAVING);
@@ -44,7 +43,7 @@ function Appointment(props) {
     }
   }
 
-  //Function to remove the appointment
+
   const remove = () => {
     if (mode === SHOW) {
       transition(CONFIRM);
@@ -56,7 +55,7 @@ function Appointment(props) {
     }
   }
 
-  //Function to edit the appointment
+
   const edit = () => {
     transition(EDIT);
   }
