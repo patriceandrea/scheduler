@@ -1,23 +1,13 @@
 //Helper Functions 
 
 // Select Appointments for that Day 
-export function getAppointmentsForDay(state, day) {
-
-  let appointmentArr = [];
-
-  for (const currentDay of state.days) {
-    if (currentDay.name === day) {
-      appointmentArr = currentDay.appointments;
-    }
+export const getAppointmentsForDay = (state, day) => {
+  if (day && state.days.length) {
+    const selectedDay = state.days.find((item) => item.name === day);
+    return selectedDay.appointments.map((id) => state.appointments[id]);
   }
-
-  const result = appointmentArr.map(id => {
-    return state.appointments[id];
-  });
-
-  return result;
-
-}
+  return [];
+};
 
 // Select the Interview 
 export function getInterview(state, interview) {
